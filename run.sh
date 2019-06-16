@@ -1,11 +1,18 @@
-# !/bin/bash
+#!/bin/bash
+
+wait_for(){
+    seq $1 -1 1 | while read j; do echo -en "\r$j seconds remaining     ";sleep 1;done;echo
+}
 
 clear
-declare -i n=2
-declare -i i=0
+echo "Preparing to launch scripts"
+wait_for 20
+
+n=2
+i=0
 
 success_verbose(){
-    i=$i+1
+    i=$(($i+1))
     echo "$i/$n - Running $1"
 }
 
