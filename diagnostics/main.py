@@ -1,6 +1,7 @@
 import datetime
 import time
 import os
+from send_mail import smtp_main as mail
 
 def round2(val):
     return str(round(float(val), 2))
@@ -19,5 +20,8 @@ try:
         diagnostics = timestamp + '\n' + ip + '\n' + ping + '\n' + ram + '\n' + cpu + '\n'
 
         print(diagnostics + '\n')
-except:
+except KeyboardInterrupt:
+    print("Exited normally.")
+except Exception as e:
     print("Exiting...")
+    mail("Abnormal exit | Diagnostics", str(e))

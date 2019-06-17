@@ -2,6 +2,7 @@ import time
 import config
 import uniqid
 import paho.mqtt.client as paho
+from send_mail import smtp_main as mail
 
 class subscriber:
     
@@ -85,9 +86,10 @@ while True:
         new_sub.stop_listening()
         print("Exiting")
         break
-    except:
+    except Exception as e:
         new_sub.stop_listening()
         del(new_sub)
+        mail("Abnormal exit | MQTT service", str(e))
         time.sleep(10)
         new_sub = subscriber()
         new_sub.start_listening()
