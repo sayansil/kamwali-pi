@@ -85,7 +85,7 @@ while True:
         new_sub.stop_listening()
         print("Exiting")
         break
-    except Exception:
+    except:
         new_sub.stop_listening()
         del(new_sub)
         time.sleep(10)
